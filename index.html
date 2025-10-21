@@ -7,158 +7,54 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial; direction: rtl; background: #667eea; min-height: 100vh; }
-        
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         .screen { display: none; }
         .screen.show { display: block; }
-        
-        .welcome {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            margin-top: 20px;
-        }
-        
+        .welcome { background: white; border-radius: 20px; padding: 40px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.2); margin-top: 20px; }
         .emoji { font-size: 80px; margin: 20px 0; }
         h1 { font-size: 40px; color: #667eea; margin: 20px 0; }
         h2 { font-size: 28px; color: #333; margin: 15px 0; }
         p { font-size: 16px; color: #555; margin: 10px 0; }
-        
-        .student-box { 
-            background: #e0e7ff; 
-            border: 3px solid #667eea; 
-            border-radius: 15px; 
-            padding: 20px; 
-            margin: 20px 0; 
-        }
-        
+        .student-box { background: #e0e7ff; border: 3px solid #667eea; border-radius: 15px; padding: 20px; margin: 20px 0; }
         .student-name { font-size: 26px; font-weight: bold; color: #333; }
-        
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 10px;
-            width: calc(100% - 20px);
-            transition: 0.3s;
-        }
-        
+        button { padding: 15px 30px; font-size: 18px; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin: 10px; width: calc(100% - 20px); transition: all 0.3s; }
+        button:active { transform: scale(0.95); }
         .btn-easy { background: #22c55e; color: white; }
         .btn-easy:hover { background: #16a34a; }
-        
         .btn-medium { background: #eab308; color: black; }
         .btn-medium:hover { background: #ca8a04; }
-        
         .btn-hard { background: #ef4444; color: white; }
         .btn-hard:hover { background: #dc2626; }
-        
         .btn-blue { background: #3b82f6; color: white; }
         .btn-blue:hover { background: #1e40af; }
-        
-        .game-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        
-        .score-box {
-            background: #f0f0f0;
-            padding: 10px 15px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 16px;
-            flex: 1;
-            text-align: center;
-        }
-        
+        .game-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .top-bar { display: flex; justify-content: space-between; margin-bottom: 20px; gap: 10px; }
+        .score-box { background: #f0f0f0; padding: 10px 15px; border-radius: 50px; font-weight: bold; font-size: 16px; flex: 1; text-align: center; }
         .timer { background: #22c55e !important; color: white; }
         .timer.warn { background: #eab308 !important; }
         .timer.danger { background: #ef4444 !important; color: white; }
-        
         .question { font-size: 24px; font-weight: bold; text-align: center; margin: 30px 0; }
-        
         .options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 30px 0; }
-        
-        .option-btn {
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        
+        .option-btn { padding: 15px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; transition: all 0.3s; }
+        .option-btn:hover:not(:disabled) { transform: scale(1.05); }
+        .option-btn:active { transform: scale(0.95); }
+        .option-btn:disabled { cursor: not-allowed; opacity: 0.7; }
         .option-btn.correct { background: #22c55e; }
         .option-btn.wrong { background: #ef4444; }
-        
-        .feedback { text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0; }
-        
+        .feedback { text-align: center; font-size: 20px; font-weight: bold; margin: 20px 0; min-height: 30px; }
         .reward { background: #fef3c7; border: 2px solid #fbbf24; border-radius: 10px; padding: 15px; margin: 20px 0; display: none; }
         .reward.show { display: block; }
-        
         .next-btn { width: 100%; padding: 15px; display: none; margin-top: 20px; }
         .next-btn.show { display: block; }
-        
-        .finish {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        
+        .finish { background: white; border-radius: 20px; padding: 40px; text-align: center; margin-top: 20px; }
         .finish-emoji { font-size: 100px; }
         .final-score { font-size: 40px; font-weight: bold; color: #22c55e; margin: 20px 0; }
-        
-        .stats-box {
-            background: #f0f0f0;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        
-        .stat-item {
-            display: flex;
-            justify-content: space-around;
-            gap: 20px;
-        }
-        
-        .stat-correct {
-            background: #dcfce7;
-            border: 2px solid #22c55e;
-            border-radius: 10px;
-            padding: 15px;
-            flex: 1;
-            text-align: center;
-        }
-        
-        .stat-wrong {
-            background: #fee2e2;
-            border: 2px solid #ef4444;
-            border-radius: 10px;
-            padding: 15px;
-            flex: 1;
-            text-align: center;
-        }
-        
+        .stats-box { background: #f0f0f0; border-radius: 15px; padding: 25px; margin: 20px 0; }
+        .stat-item { display: flex; justify-content: space-around; gap: 20px; }
+        .stat-correct { background: #dcfce7; border: 2px solid #22c55e; border-radius: 10px; padding: 15px; flex: 1; text-align: center; }
+        .stat-wrong { background: #fee2e2; border: 2px solid #ef4444; border-radius: 10px; padding: 15px; flex: 1; text-align: center; }
         .stat-number { font-size: 32px; color: #333; margin: 5px 0; }
         .stat-label { font-size: 14px; color: #666; }
-        
         .hidden { display: none !important; }
     </style>
 </head>
@@ -181,16 +77,18 @@
                 <p><strong>كل إجابة صحيحة = 5 نقاط + نصيحة 🌱</strong></p>
             </div>
             
-            <button class="btn-easy" onclick="start('easy')">🌱 سهل</button>
-            <button class="btn-medium" onclick="start('medium')">⚡ متوسط</button>
-            <button class="btn-hard" onclick="start('hard')">🔥 صعب</button>
+            <button class="btn-easy" onclick="startGame('easy')">🌱 سهل</button>
+            <button class="btn-medium" onclick="startGame('medium')">⚡ متوسط</button>
+            <button class="btn-hard" onclick="startGame('hard')">🔥 صعب</button>
             
             <hr style="margin: 30px 0; border: none; border-top: 2px solid #ddd;">
             
             <h2 style="font-size: 20px; margin: 20px 0;">العاب أخرى</h2>
-            <a href="https://worm-game-seven.vercel.app/" target="_blank" style="display: block; margin: 10px 0;">
-                <button style="background: #764ba2; width: 100%; padding: 15px;">🐛 لعبة الدودة الجشعة</button>
+            <a href="https://worm-game-seven.vercel.app/" target="_blank" style="display: block; margin: 10px 0; text-decoration: none;">
+                <button style="background: #764ba2; color: white; width: 100%; padding: 15px;">🐛 لعبة الدودة الجشعة</button>
             </a>
+            
+            <button class="btn-blue" onclick="showTipsScreen()">💡 25 نصيحة مفيدة</button>
         </div>
     </div>
     
@@ -212,7 +110,7 @@
                 <p id="reward-text"></p>
             </div>
             
-            <button class="btn-blue next-btn" id="nextBtn" onclick="next()">التالي ➜</button>
+            <button class="btn-blue next-btn" id="nextBtn" onclick="nextQuestion()">التالي ➜</button>
         </div>
     </div>
     
@@ -238,317 +136,277 @@
             <p>شكراً لك على المساهمة! 🌍</p>
             
             <button class="btn-blue" onclick="goHome()">العودة للبداية 🏠</button>
-            <button class="btn-easy" onclick="start(game.level)">العب مجدداً 🔄</button>
+            <button class="btn-easy" onclick="restartGame()">العب مجدداً 🔄</button>
         </div>
     </div>
     
     <div id="pauseBg" class="hidden" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000;">
         <div class="welcome" style="width: 90%; max-width: 400px;">
             <h2>⏸️ تم الإيقاف</h2>
-            <button class="btn-blue" onclick="pauseGame(false)">▶️ استمرار</button>
-            <button class="btn-medium" onclick="start(game.level)">🔄 إعادة</button>
+            <button class="btn-blue" onclick="resumeGame()">▶️ استمرار</button>
+            <button class="btn-medium" onclick="restartGame()">🔄 إعادة</button>
             <button class="btn-hard" onclick="goHome()">⛔ إيقاف</button>
+        </div>
+    </div>
+    
+    <div id="tipsScreen" class="screen">
+        <div class="welcome">
+            <h2>💡 25 نصيحة مفيدة</h2>
+            <div style="max-height: 500px; overflow-y: auto; text-align: right; padding: 20px;">
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">1. 🌱 ازرع شجرة واحدة على الأقل</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">2. 💧 لا تهدر الماء</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">3. ♻️ أعد تدوير البلاستيك</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">4. 📚 اقرأ كتاباً شهرياً</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">5. 🏃 مارس الرياضة</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">6. 😴 نم 8 ساعات</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">7. 🥗 تناول صحي</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">8. 💧 اشرب 8 أكواب ماء</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">9. 🚴 استخدم الدراجة</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">10. 🔌 أطفئ الأجهزة</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">11. 😊 ابتسم وانشر السعادة</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">12. 🤝 ساعد الآخرين</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">13. 🙏 كن شاكراً</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">14. 💪 تعلم مهارة جديدة</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">15. 🎯 ضع أهدافاً واضحة</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">16. 👂 استمع للآخرين</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">17. 🧘 خذ وقتاً للاسترخاء</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">18. 📱 قلل من الهاتف</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">19. 🌞 استيقظ مبكراً</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">20. 🧹 نظف غرفتك</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">21. ❤️ عبر عن حبك</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">22. 🎨 مارس هواية</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">23. 🌍 تعرف على ثقافات</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">24. 🤐 كن صادقاً</div>
+                <div style="background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 10px; border-right: 4px solid #667eea;">25. 💭 فكر إيجابياً</div>
+            </div>
+            <button class="btn-blue" onclick="goHome()">العودة للبداية 🏠</button>
         </div>
     </div>
 </div>
 
 <script>
+const tips = ['🌱 ازرع شجرة', '💧 لا تهدر الماء', '♻️ أعد التدوير', '📚 اقرأ كتاباً', '🏃 مارس الرياضة', '😴 نم بانتظام', '🥗 تناول صحي', '💧 اشرب ماء', '🚴 استخدم الدراجة', '🔌 أطفئ الأجهزة', '⏳ كن صبوراً'];
+
 const easyQuestions = [
-    { q: '1 + 1 = ؟', a: '2', opts: ['1', '2', '3', '4'] },
-    { q: '10 - 3 = ؟', a: '7', opts: ['5', '7', '9', '6'] },
-    { q: '5 + 5 = ؟', a: '10', opts: ['8', '10', '12', '15'] },
-    { q: '2 × 3 = ؟', a: '6', opts: ['4', '5', '6', '8'] },
-    { q: '8 ÷ 2 = ؟', a: '4', opts: ['3', '4', '5', '6'] },
-    { q: 'كم عدد أصابع اليد؟', a: '5', opts: ['4', '5', '6', '7'] },
-    { q: 'كم عدد أيام الأسبوع؟', a: '7', opts: ['5', '6', '7', '8'] },
-    { q: 'أين تشرق الشمس؟', a: 'الشرق', opts: ['الغرب', 'الشرق', 'الشمال', 'الجنوب'] },
-    { q: 'ما لون البحر؟', a: 'أزرق', opts: ['أخضر', 'أزرق', 'أحمر', 'أسود'] },
-    { q: 'كم عدد أشهر السنة؟', a: '12', opts: ['10', '11', '12', '13'] },
-    { q: 'كم عدد ساعات اليوم؟', a: '24', opts: ['12', '20', '24', '30'] },
-    { q: 'ما لون العلم السعودي؟', a: 'أخضر', opts: ['أحمر', 'أخضر', 'أزرق', 'أسود'] },
-    { q: '3 + 4 = ؟', a: '7', opts: ['6', '7', '8', '9'] },
-    { q: 'كم عدد أصابع القدم؟', a: '5', opts: ['4', '5', '6', '7'] },
-    { q: '9 + 9 = ؟', a: '18', opts: ['16', '17', '18', '19'] },
-    { q: '15 - 8 = ؟', a: '7', opts: ['6', '7', '8', '9'] },
-    { q: 'ما عاصمة مصر؟', a: 'القاهرة', opts: ['الإسكندرية', 'القاهرة', 'الجيزة', 'أسيوط'] },
-    { q: 'ما عاصمة السعودية؟', a: 'الرياض', opts: ['جدة', 'الرياض', 'الدمام', 'مكة'] },
-    { q: 'كم عدد قارات الأرض؟', a: '7', opts: ['5', '6', '7', '8'] },
-    { q: 'عاصمة الإمارات؟', a: 'أبو ظبي', opts: ['دبي', 'أبو ظبي', 'الشارقة', 'عجمان'] },
-    { q: 'متى اتحدت الإمارات؟', a: '1971', opts: ['1968', '1970', '1971', '1975'] },
-    { q: 'كم عدد إمارات الإمارات؟', a: '7', opts: ['5', '6', '7', '8'] },
-    { q: 'كم عدد أركان الإسلام؟', a: '5', opts: ['3', '4', '5', '6'] },
-    { q: 'في أي شهر يصوم المسلمون؟', a: 'رمضان', opts: ['شوال', 'رمضان', 'ذو الحجة', 'محرم'] },
-    { q: 'كم عدد حروف الأبجدية العربية؟', a: '28', opts: ['26', '28', '30', '32'] },
-    { q: 'كم عدد ألوان قوس قزح؟', a: '7', opts: ['6', '7', '8', '9'] },
-    { q: 'ما أكبر كائن بحري؟', a: 'الحوت الأزرق', opts: ['سمك القرش', 'الحوت الأزرق', 'الأخطبوط', 'الدلفين'] },
-    { q: '25 × 4 = ؟', a: '100', opts: ['80', '90', '100', '110'] },
-    { q: 'كم عدد أسنان الإنسان البالغ؟', a: '32', opts: ['28', '30', '32', '36'] },
-    { q: 'كم عدد أركان الإيمان؟', a: '6', opts: ['5', '6', '7', '8'] },
-    { q: 'ما أكبر محيط في العالم؟', a: 'الهادئ', opts: ['الأطلسي', 'الهادئ', 'الهندي', 'المتجمد'] },
-    { q: 'كم عدد سور القرآن؟', a: '114', opts: ['110', '112', '114', '116'] },
-    { q: 'كم عدد أيام السنة؟', a: '365', opts: ['360', '365', '370', '375'] },
-    { q: '30 + 70 = ؟', a: '100', opts: ['90', '100', '110', '120'] },
-    { q: 'كم عدد جزر الإمارات؟', a: '200', opts: ['100', '200', '300', '400'] },
-    { q: 'ما أصغر قارة؟', a: 'أستراليا', opts: ['أفريقيا', 'أستراليا', 'أوروبا', 'آسيا'] },
-    { q: 'كم عدد دول مجلس التعاون؟', a: '6', opts: ['5', '6', '7', '8'] },
-    { q: 'أين تغرب الشمس؟', a: 'الغرب', opts: ['الشرق', 'الغرب', 'الشمال', 'الجنوب'] },
-    { q: 'كم عدد أطراف نجمة البحر؟', a: '5', opts: ['4', '5', '6', '7'] },
-    { q: '50 ÷ 5 = ؟', a: '10', opts: ['8', '9', '10', '11'] },
-    { q: 'ما أطول نهر في الشرق الأوسط؟', a: 'الفرات', opts: ['النيل', 'الفرات', 'الدجلة', 'الأردن'] }
+    { q: 'ما هو أكبر كوكب في المجموعة الشمسية؟', a: 'ج) المشتري', opts: ['أ) الأرض', 'ب) زحل', 'ج) المشتري', 'د) المريخ'] },
+    { q: 'ما عاصمة فرنسا؟', a: 'ب) باريس', opts: ['أ) مدريد', 'ب) باريس', 'ج) برلين', 'د) لندن'] },
+    { q: 'كم عدد أركان الإسلام؟', a: 'ب) 5', opts: ['أ) 4', 'ب) 5', 'ج) 6', 'د) 7'] },
+    { q: 'من النبي الذي ابتلعه الحوت؟', a: 'ج) يونس', opts: ['أ) موسى', 'ب) نوح', 'ج) يونس', 'د) يوسف'] },
+    { q: 'من هو مخترع المصباح الكهربائي؟', a: 'أ) أديسون', opts: ['أ) أديسون', 'ب) نيوتن', 'ج) أينشتاين', 'د) غاليليو'] },
+    { q: 'في أي قارة تقع مصر؟', a: 'ب) أفريقيا', opts: ['أ) آسيا', 'ب) أفريقيا', 'ج) أوروبا', 'د) أمريكا'] },
+    { q: 'كم دقيقة في الساعة؟', a: 'ج) 60', opts: ['أ) 30', 'ب) 45', 'ج) 60', 'د) 90'] },
+    { q: 'ما هو لون السماء وقت النهار؟', a: 'أ) أزرق', opts: ['أ) أزرق', 'ب) أحمر', 'ج) رمادي', 'د) أخضر'] },
+    { q: 'الحيوان الذي يُلقب بـ "سفينة الصحراء" هو؟', a: 'ب) الجمل', opts: ['أ) الحصان', 'ب) الجمل', 'ج) الغزال', 'د) الفيل'] },
+    { q: 'ما هو صوت القط؟', a: 'ب) مواء', opts: ['أ) نباح', 'ب) مواء', 'ج) صهيل', 'د) زئير'] }
 ];
 
 const mediumQuestions = [
-    { q: '15 + 25 = ؟', a: '40', opts: ['35', '40', '45', '50'] },
-    { q: '100 - 50 = ؟', a: '50', opts: ['40', '45', '50', '55'] },
-    { q: '20 × 5 = ؟', a: '100', opts: ['80', '90', '100', '110'] },
-    { q: '144 ÷ 12 = ؟', a: '12', opts: ['10', '12', '14', '16'] },
-    { q: 'كم عدد أحرف كلمة "أسد"؟', a: '3', opts: ['2', '3', '4', '5'] },
-    { q: 'ما الفعل الماضي لكلمة "يكتب"؟', a: 'كتب', opts: ['يكتب', 'كتب', 'اكتب', 'كاتب'] },
-    { q: 'من هو خليفة الرسول الأول؟', a: 'أبو بكر الصديق', opts: ['عمر', 'أبو بكر الصديق', 'عثمان', 'علي'] },
-    { q: 'في أي عام هاجر النبي؟', a: '622', opts: ['600', '622', '640', '660'] },
-    { q: 'كم عدد الخلفاء الراشدين؟', a: '4', opts: ['3', '4', '5', '6'] },
-    { q: 'عاصمة تركيا؟', a: 'أنقرة', opts: ['إسطنبول', 'أنقرة', 'إزمير', 'بورصة'] },
-    { q: 'كم عدد سكان العالم تقريباً؟', a: '8 مليار', opts: ['7', '8 مليار', '9', '10'] },
-    { q: 'ما أكبر دولة أفريقية؟', a: 'نيجيريا', opts: ['مصر', 'نيجيريا', 'إثيوبيا', 'الكونغو'] },
-    { q: 'ما أكبر مدينة في الإمارات؟', a: 'دبي', opts: ['أبو ظبي', 'دبي', 'الشارقة', 'عجمان'] },
-    { q: 'في أي إمارة برج خليفة؟', a: 'دبي', opts: ['أبو ظبي', 'دبي', 'الشارقة', 'عجمان'] },
-    { q: 'كم عدد بحار العالم؟', a: '5', opts: ['3', '4', '5', '6'] },
-    { q: 'ما أعمق محيط؟', a: 'الهادئ', opts: ['الأطلسي', 'الهادئ', 'الهندي', 'المتجمد'] },
-    { q: 'ما أطول نهر في العالم؟', a: 'النيل', opts: ['الفرات', 'النيل', 'الأمازون', 'الدانوب'] },
-    { q: 'كم سكان الإمارات تقريباً؟', a: '9 ملايين', opts: ['5', '9 ملايين', '12', '15'] },
-    { q: 'كم أيام شهر رمضان؟', a: '29 أو 30', opts: ['27', '28', '29 أو 30', '31'] },
-    { q: 'ما أطول سورة في القرآن؟', a: 'البقرة', opts: ['آل عمران', 'البقرة', 'النساء', 'المائدة'] },
-    { q: 'ركعات صلاة الجمعة؟', a: '2', opts: ['1', '2', '3', '4'] },
-    { q: 'عاصمة كندا؟', a: 'أوتاوا', opts: ['تورنتو', 'أوتاوا', 'مونتريال', 'فانكوفر'] },
-    { q: 'عاصمة قطر؟', a: 'الدوحة', opts: ['الريان', 'الدوحة', 'الوكرة', 'أم صلال'] },
-    { q: 'من أول من آمن بالنبي؟', a: 'خديجة', opts: ['علي', 'خديجة', 'أبو بكر', 'عمر'] },
-    { q: '200 - 120 = ؟', a: '80', opts: ['70', '80', '90', '100'] },
-    { q: 'أيام شهر ديسمبر؟', a: '31', opts: ['28', '29', '30', '31'] },
-    { q: 'عاصمة الأردن؟', a: 'عمّان', opts: ['إربد', 'عمّان', 'الزرقاء', 'مأدبا'] },
-    { q: '500 + 500 = ؟', a: '1000', opts: ['900', '1000', '1100', '1200'] },
-    { q: 'السنة الكبيسة؟', a: '366', opts: ['364', '365', '366', '367'] },
-    { q: 'أركان الحج الأساسية؟', a: '4', opts: ['3', '4', '5', '6'] },
-    { q: 'أصغر دول العالم؟', a: 'الفاتيكان', opts: ['موناكو', 'الفاتيكان', 'لوكسمبرج', 'سان مارينو'] },
-    { q: 'أكبر إمارة مساحة؟', a: 'أبو ظبي', opts: ['دبي', 'أبو ظبي', 'الشارقة', 'رأس الخيمة'] },
-    { q: 'أكبر بحيرة عذبة؟', a: 'بايكال', opts: ['قزوين', 'بايكال', 'السوبيريور', 'تنجانيقا'] },
-    { q: 'كم عدد الأنبياء في القرآن؟', a: '25', opts: ['20', '25', '30', '35'] },
-    { q: 'ما معنى كلمة الأرق؟', a: 'عدم النوم', opts: ['الحزن', 'عدم النوم', 'الخوف', 'الألم'] },
-    { q: '350 + 150 = ؟', a: '500', opts: ['450', '500', '550', '600'] }
+    { q: 'ما هو الكوكب الأحمر؟', a: 'ب) المريخ', opts: ['أ) عطارد', 'ب) المريخ', 'ج) زحل', 'د) الأرض'] },
+    { q: 'من أول من جهر بالقرآن في مكة؟', a: 'ب) عبدالله بن مسعود', opts: ['أ) عمر بن الخطاب', 'ب) عبدالله بن مسعود', 'ج) بلال بن رباح', 'د) علي بن أبي طالب'] },
+    { q: 'كم عدد سور القرآن الكريم؟', a: 'ج) 114', opts: ['أ) 110', 'ب) 112', 'ج) 114', 'د) 116'] },
+    { q: 'ما أكبر محيط في العالم؟', a: 'ج) الهادي', opts: ['أ) الأطلسي', 'ب) الهندي', 'ج) الهادي', 'د) المتجمد'] },
+    { q: 'في أي عام تأسست الأمم المتحدة؟', a: 'ب) 1945', opts: ['أ) 1918', 'ب) 1945', 'ج) 1960', 'د) 1971'] },
+    { q: 'ما العنصر الكيميائي الذي رمزه O؟', a: 'أ) الأكسجين', opts: ['أ) الأكسجين', 'ب) الحديد', 'ج) الفضة', 'د) الزئبق'] },
+    { q: 'ما اسم أول خليفة عباسي؟', a: 'ب) السفاح', opts: ['أ) المنصور', 'ب) السفاح', 'ج) الرشيد', 'د) المعتصم'] },
+    { q: 'كم قلب للأخطبوط؟', a: 'ج) 3', opts: ['أ) 1', 'ب) 2', 'ج) 3', 'د) 4'] },
+    { q: 'ما اسم أطول نهر في العالم؟', a: 'أ) الأمازون', opts: ['أ) الأمازون', 'ب) النيل', 'ج) المسيسيبي', 'د) الدانوب'] },
+    { q: 'من الذي بنى الكعبة أول مرة؟', a: 'أ) إبراهيم وإسماعيل', opts: ['أ) إبراهيم وإسماعيل', 'ب) نوح', 'ج) يعقوب', 'د) آدم'] }
 ];
 
 const hardQuestions = [
-    { q: '√729 = ؟', a: '27', opts: ['24', '25', '27', '30'] },
-    { q: 'كم عدد أحزاب القرآن؟', a: '60', opts: ['50', '60', '70', '80'] },
-    { q: 'من مؤسس الدولة العثمانية؟', a: 'عثمان بك', opts: ['محمد الفاتح', 'عثمان بك', 'سليمان', 'مراد'] },
-    { q: 'في أي سنة فتح المسلمون الأندلس؟', a: '711', opts: ['700', '711', '720', '735'] },
-    { q: 'كم عدد أعضاء مجلس الأمن الدائمين؟', a: '5', opts: ['3', '4', '5', '6'] },
-    { q: 'ما هو أعمق محيط في العالم؟', a: 'الهادئ', opts: ['الأطلسي', 'الهادئ', 'الهندي', 'المتجمد'] },
-    { q: 'كم عدد دول الاتحاد الأوروبي؟', a: '27', opts: ['25', '26', '27', '28'] },
-    { q: 'من مؤسس الإمارات؟', a: 'الشيخ زايد بن سلطان', opts: ['محمد بن راشد', 'الشيخ زايد بن سلطان', 'خليفة', 'سلطان'] },
-    { q: 'متى تأسست الإمارات؟', a: '1971', opts: ['1970', '1971', '1972', '1973'] },
-    { q: 'ما أعمق نقطة في المحيطات (بالمتر)؟', a: '11000', opts: ['8000', '10000', '11000', '13000'] },
-    { q: 'كم عدد محيطات العالم؟', a: '5', opts: ['3', '4', '5', '6'] },
-    { q: 'أكبر بحيرة في العالم؟', a: 'بحر قزوين', opts: ['بحر قزوين', 'بايكال', 'تنجانيقا', 'السوبيريور'] },
-    { q: 'أطول جزيرة في العالم؟', a: 'جرينلاند', opts: ['مدغشقر', 'جرينلاند', 'بورنيو', 'سومطرة'] },
-    { q: 'من رائد الفيزياء النسبية؟', a: 'أينشتاين', opts: ['تسلا', 'أينشتاين', 'بلانك', 'رذرفورد'] },
-    { q: 'كم عدد كواكب المجموعة الشمسية؟', a: '8', opts: ['7', '8', '9', '10'] },
-    { q: 'أكبر جزيرة في البحر المتوسط؟', a: 'صقلية', opts: ['كريت', 'صقلية', 'قبرص', 'رودس'] },
-    { q: 'أطول قناة اصطناعية في العالم؟', a: 'قناة السويس', opts: ['قناة بنما', 'قناة السويس', 'قناة الدانوب', 'أمستردام'] },
-    { q: 'كم عمق أعمق نقطة في البحر الأحمر؟', a: '3040', opts: ['2500', '3040', '3500', '4000'] },
-    { q: 'ما أعلى جبل في الإمارات؟', a: 'جبل جيس', opts: ['جبل حفيت', 'جبل جيس', 'جبل مرة', 'جبل القاهرة'] },
-    { q: 'كم عدد أيام الدورة القمرية؟', a: '29.5', opts: ['27.3', '28', '29.5', '30'] },
-    { q: 'ما أقسام العلوم الإسلامية الثلاثة؟', a: '3', opts: ['2', '3', '4', '5'] },
-    { q: 'كم عدد دول آسيا تقريباً؟', a: '48', opts: ['45', '48', '50', '52'] },
-    { q: 'ما أكبر صحراء في العالم من حيث الرمل؟', a: 'الربع الخالي', opts: ['الكلهاري', 'الربع الخالي', 'جوبي', 'أتاكاما'] },
-    { q: 'كم عدد أركان الإسلام الخمسة؟', a: '5', opts: ['3', '4', '5', '6'] },
-    { q: 'في أي سنة سقطت الدولة العثمانية؟', a: '1922', opts: ['1900', '1920', '1922', '1925'] },
-    { q: 'ما أكبر دولة إسلامية من حيث المساحة؟', a: 'كازاخستان', opts: ['إندونيسيا', 'كازاخستان', 'إيران', 'السعودية'] },
-    { q: 'كم عدد دول الشرق الأوسط تقريباً؟', a: '17', opts: ['15', '16', '17', '18'] },
-    { q: 'ما أطول سلسلة جبال في العالم؟', a: 'الأنديز', opts: ['الهيمالايا', 'الأنديز', 'الروكي', 'جبال الأطلس'] },
-    { q: 'كم عدد لغات العالم تقريباً؟', a: '7000', opts: ['5000', '6000', '7000', '8000'] },
-    { q: 'ما أقدم حضارة في العالم؟', a: 'السومرية', opts: ['المصرية', 'السومرية', 'الفرعونية', 'الإغريقية'] },
-    { q: 'كم عدد أسفار التوراة؟', a: '39', opts: ['36', '38', '39', '40'] },
-    { q: 'ما أكبر دولة أفريقية من حيث السكان الآن؟', a: 'نيجيريا', opts: ['مصر', 'نيجيريا', 'إثيوبيا', 'الكونغو'] },
-    { q: 'كم عدد قارات العالم المأهولة بالسكان؟', a: '6', opts: ['5', '6', '7', '8'] },
-    { q: 'ما أصغر دولة في العالم من حيث المساحة؟', a: 'الفاتيكان', opts: ['موناكو', 'الفاتيكان', 'سان مارينو', 'ليختنشتاين'] },
-    { q: 'كم عدد الدول الساحلية في آسيا؟', a: '28', opts: ['25', '26', '28', '30'] },
-    { q: 'ما أعلى هضبة في العالم؟', a: 'هضبة التبت', opts: ['هضبة الأناضول', 'هضبة التبت', 'هضبة إيران', 'هضبة الحبشة'] },
-    { q: '2³ + 3² = ؟', a: '17', opts: ['15', '16', '17', '18'] },
-    { q: 'كم عدد الدول التي لها حدود برية مع السعودية؟', a: '5', opts: ['4', '5', '6', '7'] },
-    { q: 'ما أكبر دلتا في العالم؟', a: 'دلتا النيل', opts: ['دلتا ميكونج', 'دلتا النيل', 'دلتا الأمازون', 'دلتا الجانج'] }
+    { q: 'كم يبلغ قطر الأرض تقريبًا؟', a: 'ب) 12,742 كم', opts: ['أ) 10,000 كم', 'ب) 12,742 كم', 'ج) 20,000 كم', 'د) 8,000 كم'] },
+    { q: 'في أي عام وُلد النبي محمد ﷺ؟', a: 'ب) 570م', opts: ['أ) 520م', 'ب) 570م', 'ج) 600م', 'د) 610م'] },
+    { q: 'من أول من وضع علم الجبر؟', a: 'أ) الخوارزمي', opts: ['أ) الخوارزمي', 'ب) ابن سينا', 'ج) الفارابي', 'د) البيروني'] },
+    { q: 'ما أول معركة في الإسلام؟', a: 'ب) بدر', opts: ['أ) أحد', 'ب) بدر', 'ج) الخندق', 'د) تبوك'] },
+    { q: 'كم عدد أحزاب القرآن؟', a: 'أ) 60 حزب', opts: ['أ) 60 حزب', 'ب) 120', 'ج) 30', 'د) 90'] },
+    { q: 'في أي عام سقطت الأندلس؟', a: 'ب) 1492', opts: ['أ) 1392', 'ب) 1492', 'ج) 1592', 'د) 1692'] },
+    { q: 'من هو أول طبيب في الإسلام؟', a: 'أ) الحارث بن كلدة', opts: ['أ) الحارث بن كلدة', 'ب) ابن سينا', 'ج) الرازي', 'د) الزهراوي'] },
+    { q: 'ما اسم أطول نهر في آسيا؟', a: 'أ) اليانغتسي', opts: ['أ) اليانغتسي', 'ب) الميكونغ', 'ج) السند', 'د) الفرات'] },
+    { q: 'من هو مكتشف الدورة الدموية الصغرى؟', a: 'أ) ابن النفيس', opts: ['أ) ابن النفيس', 'ب) هارفي', 'ج) الرازي', 'د) جالينوس'] },
+    { q: 'كم عدد العضلات في جسم الإنسان؟', a: 'ب) 620', opts: ['أ) 300', 'ب) 620', 'ج) 700', 'د) 800'] }
 ];
 
-const tips = [
-    '🌱 احرص على زراعة الأشجار فهي تنقي الهواء',
-    '💧 وفر الماء وأغلق الصنبور أثناء الاستحمام',
-    '♻️ أعد التدوير - فرّغ القمامة في أماكن مخصصة',
-    '🔌 أطفئ الأنوار عندما لا تحتاجها',
-    '🚴 استخدم الدراجة بدلاً من السيارة',
-    '💪 مارس الرياضة يومياً',
-    '😴 نم 8 ساعات يومياً',
-    '🥗 اشرب الماء بكثرة',
-    '📚 اقرأ كتاباً كل شهر',
-    '✏️ ركز في الدرس',
-    '❤️ ساعد الآخرين',
-    '🤐 كن صادقاً دائماً',
-    '😊 ابتسم وانشر الفرح',
-    '👂 استمع للآخرين باهتمام',
-    '🙏 كن متواضعاً'
-];
-
-let game = {
-    level: null,
+const game = {
+    level: '',
     questions: [],
-    current: 0,
+    currentQ: 0,
     score: 0,
     correct: 0,
     wrong: 0,
-    answered: false,
-    timer: 30,
-    interval: null,
-    paused: false
+    timer: null,
+    timeLeft: 30,
+    isPaused: false
 };
 
-function shuffle(arr) {
-    return [...arr].sort(() => Math.random() - 0.5);
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('show'));
+    document.getElementById(id).classList.add('show');
 }
 
-function start(level) {
+function startGame(level) {
     game.level = level;
-    let levelQuestions = easyQuestions;
-    if (level === 'medium') levelQuestions = mediumQuestions;
-    if (level === 'hard') levelQuestions = hardQuestions;
-    
-    game.questions = shuffle(levelQuestions).slice(0, 10);
-    game.current = 0;
+    game.currentQ = 0;
     game.score = 0;
     game.correct = 0;
     game.wrong = 0;
-    game.answered = false;
-    game.timer = 30;
-    game.paused = false;
+    game.isPaused = false;
     
-    document.getElementById('welcome').classList.remove('show');
-    document.getElementById('finish').classList.remove('show');
-    document.getElementById('game').classList.add('show');
+    if (level === 'easy') game.questions = shuffle([...easyQuestions]).slice(0, 10);
+    else if (level === 'medium') game.questions = shuffle([...mediumQuestions]).slice(0, 10);
+    else game.questions = shuffle([...hardQuestions]).slice(0, 10);
     
-    setTimeout(() => {
-        showQuestion();
-        startTimer();
-    }, 100);
+    showScreen('game');
+    loadQuestion();
 }
 
-function showQuestion() {
-    const q = game.questions[game.current];
-    const opts = shuffle(q.opts);
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function loadQuestion() {
+    if (game.currentQ >= 10) {
+        endGame();
+        return;
+    }
     
+    const q = game.questions[game.currentQ];
     document.getElementById('question').textContent = q.q;
-    document.getElementById('qnum').textContent = game.current + 1;
+    document.getElementById('qnum').textContent = game.currentQ + 1;
     document.getElementById('score').textContent = game.score;
     document.getElementById('feedback').textContent = '';
     document.getElementById('reward').classList.remove('show');
     document.getElementById('nextBtn').classList.remove('show');
     
-    const optsContainer = document.getElementById('options');
-    optsContainer.innerHTML = '';
+    const opts = document.getElementById('options');
+    opts.innerHTML = '';
+    const shuffledOpts = shuffle([...q.opts]);
     
-    opts.forEach(opt => {
+    shuffledOpts.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.textContent = opt;
-        btn.disabled = false;
-        btn.onclick = () => answer(opt, q.a);
-        optsContainer.appendChild(btn);
+        btn.onclick = () => checkAnswer(opt, btn);
+        opts.appendChild(btn);
     });
     
-    game.answered = false;
+    startTimer();
 }
 
-function answer(selected, correct) {
-    if (game.answered) return;
-    game.answered = true;
+function startTimer() {
+    game.timeLeft = 30;
+    const timerEl = document.getElementById('timer');
+    const timerBox = document.getElementById('timerBox');
     
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.disabled = true;
-        if (btn.textContent === correct) btn.classList.add('correct');
-        else if (btn.textContent === selected) btn.classList.add('wrong');
-    });
+    if (game.timer) clearInterval(game.timer);
     
-    if (selected === correct) {
-        document.getElementById('feedback').textContent = '✨ صحيح!';
+    game.timer = setInterval(() => {
+        if (game.isPaused) return;
+        
+        game.timeLeft--;
+        timerEl.textContent = game.timeLeft;
+        
+        if (game.timeLeft <= 5) timerBox.className = 'score-box timer danger';
+        else if (game.timeLeft <= 10) timerBox.className = 'score-box timer warn';
+        else timerBox.className = 'score-box timer';
+        
+        if (game.timeLeft <= 0) {
+            clearInterval(game.timer);
+            wrongAnswer();
+        }
+    }, 1000);
+}
+
+function checkAnswer(selected, btn) {
+    clearInterval(game.timer);
+    const q = game.questions[game.currentQ];
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(b => b.disabled = true);
+    
+    if (selected === q.a) {
+        btn.classList.add('correct');
         game.score += 5;
         game.correct++;
         document.getElementById('score').textContent = game.score;
-        document.getElementById('reward-text').textContent = tips[Math.floor(Math.random() * tips.length)];
+        document.getElementById('feedback').textContent = '✅ إجابة صحيحة!';
+        document.getElementById('feedback').style.color = '#22c55e';
+        
+        const tip = tips[Math.floor(Math.random() * tips.length)];
+        document.getElementById('reward-text').textContent = tip;
         document.getElementById('reward').classList.add('show');
     } else {
-        document.getElementById('feedback').textContent = '❌ خطأ';
+        btn.classList.add('wrong');
+        buttons.forEach(b => {
+            if (b.textContent === q.a) b.classList.add('correct');
+        });
         game.wrong++;
+        document.getElementById('feedback').textContent = '❌ إجابة خاطئة!';
+        document.getElementById('feedback').style.color = '#ef4444';
     }
     
     document.getElementById('nextBtn').classList.add('show');
 }
 
-function next() {
-    if (game.current < game.questions.length - 1) {
-        game.current++;
-        game.timer = 30;
-        game.answered = false;
-        document.getElementById('feedback').textContent = '';
-        document.getElementById('reward').classList.remove('show');
-        document.getElementById('nextBtn').classList.remove('show');
-        showQuestion();
-    } else {
-        finish();
-    }
+function wrongAnswer() {
+    const q = game.questions[game.currentQ];
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(b => {
+        b.disabled = true;
+        if (b.textContent === q.a) b.classList.add('correct');
+    });
+    game.wrong++;
+    document.getElementById('feedback').textContent = '⏰ انتهى الوقت!';
+    document.getElementById('feedback').style.color = '#ef4444';
+    document.getElementById('nextBtn').classList.add('show');
 }
 
-function startTimer() {
-    if (game.interval) clearInterval(game.interval);
-    game.interval = setInterval(() => {
-        if (!game.paused) {
-            game.timer--;
-            document.getElementById('timer').textContent = game.timer;
-            
-            const box = document.getElementById('timerBox');
-            if (game.timer > 10) box.className = 'score-box timer';
-            else if (game.timer > 5) box.className = 'score-box timer warn';
-            else box.className = 'score-box timer danger';
-            
-            if (game.timer < 0) next();
-        }
-    }, 1000);
+function nextQuestion() {
+    game.currentQ++;
+    loadQuestion();
 }
 
-function finish() {
-    clearInterval(game.interval);
-    document.getElementById('game').classList.remove('show');
-    document.getElementById('finish').classList.add('show');
+function endGame() {
+    clearInterval(game.timer);
+    showScreen('finish');
     document.getElementById('finalScore').textContent = game.score + ' نقطة';
     document.getElementById('correctCount').textContent = game.correct;
     document.getElementById('wrongCount').textContent = game.wrong;
 }
 
 function goHome() {
-    clearInterval(game.interval);
-    document.getElementById('welcome').classList.add('show');
-    document.getElementById('game').classList.remove('show');
-    document.getElementById('finish').classList.remove('show');
+    clearInterval(game.timer);
     document.getElementById('pauseBg').classList.add('hidden');
+    game.isPaused = false;
+    showScreen('welcome');
 }
 
-function pauseGame(paused) {
-    game.paused = paused;
-    if (paused) document.getElementById('pauseBg').classList.remove('hidden');
-    else document.getElementById('pauseBg').classList.add('hidden');
+function restartGame() {
+    clearInterval(game.timer);
+    document.getElementById('pauseBg').classList.add('hidden');
+    game.isPaused = false;
+    startGame(game.level);
+}
+
+function showTipsScreen() {
+    showScreen('tipsScreen');
+}
+
+function resumeGame() {
+    game.isPaused = false;
+    document.getElementById('pauseBg').classList.add('hidden');
 }
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && document.getElementById('game').classList.contains('show')) {
-        pauseGame(!game.paused);
+        if (game.isPaused) {
+            resumeGame();
+        } else {
+            game.isPaused = true;
+            document.getElementById('pauseBg').classList.remove('hidden');
+        }
     }
 });
 </script>
-
-</body>
-</html>
