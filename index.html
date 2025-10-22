@@ -27,6 +27,8 @@
         .btn-hard:hover { background: #dc2626; }
         .btn-blue { background: #3b82f6; color: white; }
         .btn-blue:hover { background: #1e40af; }
+        .btn-purple { background: #764ba2; color: white; }
+        .btn-purple:hover { background: #5a3a7d; }
         .game-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
         .top-bar { display: flex; justify-content: space-between; margin-bottom: 20px; gap: 10px; }
         .score-box { background: #f0f0f0; padding: 10px 15px; border-radius: 50px; font-weight: bold; font-size: 16px; flex: 1; text-align: center; }
@@ -85,7 +87,11 @@
             
             <h2 style="font-size: 20px; margin: 20px 0;">العاب أخرى</h2>
             <a href="https://worm-game-seven.vercel.app/" target="_blank" style="display: block; margin: 10px 0; text-decoration: none;">
-                <button style="background: #764ba2; color: white; width: 100%; padding: 15px;">🐛 لعبة الدودة الجشعة</button>
+                <button class="btn-purple">🐛 لعبة الدودة الجشعة</button>
+            </a>
+            
+            <a href="https://a7-game.vercel.app/" target="_blank" style="display: block; margin: 10px 0; text-decoration: none;">
+                <button class="btn-purple">🎮 لعبة النصائح الجزء 2</button>
             </a>
             
             <button class="btn-blue" onclick="showTipsScreen()">💡 25 نصيحة مفيدة</button>
@@ -396,7 +402,7 @@ function showTipsScreen() {
 
 function resumeGame() {
     game.isPaused = false;
-    document.getElementById('pauseBg').classList.add('hidden');
+    document.getElementById('pauseBg').classList.remove('hidden');
 }
 
 document.addEventListener('keydown', (e) => {
